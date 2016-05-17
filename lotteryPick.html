@@ -1,0 +1,73 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<title>九宫格抽奖</title>
+<style>
+body{
+margin:0px;
+padding:0px;
+text-align:center;
+}
+div{
+margin:0px;
+padding:0xp;
+}
+.list1{
+width:30%;
+height:100px;
+line-height:100px;
+margin:1.6667%;
+background-color:red;
+float:left;
+}
+.list3{
+width:30%;
+height:100px;
+line-height:100px;
+margin:1.6667%;
+background-color:blue;
+float:left;
+}
+.list2{
+background-color:yellow;
+}
+</style>
+<script>
+function win(){
+  var list=document.getElementsByClassName("list1");
+  //var list_not=document.getElementsByClassName("notCount");
+  var count=0;
+  var seq=[0,1,2,4,7,6,5,3];//非正常路径时遍历使用数组
+  var interval=setInterval(function(){
+    if(count>=8) count=0;
+    if(count==0){
+	  list[seq[7]].className="list1";
+      list[seq[count]].className="list1 list2";
+	  count++;
+	}
+	else{
+	  list[seq[count-1]].className="list1";
+	  list[seq[count]].className="list1 list2";
+	  count++;
+	}
+  },500);
+  setTimeout(function(){
+    clearInterval(interval);
+    alert("You have won:"+list[seq[count-1]].innerHTML);
+  },10000);
+}
+</script>
+</head>
+<body>
+ <div class="list1">1</div>
+ <div class="list1">2</div>
+ <div class="list1">3</div>
+ <div class="list1">8</div>
+ <div class="list3" onclick="win();">click</div>
+ <div class="list1">4</div>
+ <div class="list1">7</div>
+ <div class="list1">6</div>
+ <div class="list1">5</div>
+</body>
+
+</html>
